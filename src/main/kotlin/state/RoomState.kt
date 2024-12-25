@@ -2,9 +2,11 @@ package state
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import util.RoomStateSerializer
 
-@Serializable
+@Serializable(with = RoomStateSerializer::class)
 sealed class RoomState {
+
     @Serializable
     @SerialName("Waiting")
     data object Waiting : RoomState()

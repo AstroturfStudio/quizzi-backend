@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 sealed class GameState {
+
     @Serializable
     data object Idle : GameState()
 
