@@ -27,7 +27,7 @@ class MessageHandler private constructor() {
             when (val clientMessage = json.decodeFromString<ClientSocketMessage>(message)) {
                 is ClientSocketMessage.CreateRoom -> {
                     val player = PlayerManagerService.INSTANCE.getPlayer(playerId)
-                    val roomId =
+                    val room =
                         RoomManagerService.INSTANCE.createRoom(
                             "${player.name}'s Room",
                             playerId,
@@ -35,11 +35,12 @@ class MessageHandler private constructor() {
                             clientMessage.gameType
                         )
                     val response = ServerSocketMessage.RoomCreated(
-                        roomId = roomId
+                        roomId = room.id
                     )
                     SessionManagerService.INSTANCE.getPlayerSession(playerId)
-                        ?.let { RoomBroadcastService.INSTANCE.subscribe(roomId, it) }
+                        ?.let { RoomBroadcastService.INSTANCE.subscribe(room.id, it) }
                     SessionManagerService.INSTANCE.broadcastToPlayers(mutableListOf(playerId), response)
+                    room.handleEvent(RoomEvent.Status)
                 }
 
                 is ClientSocketMessage.JoinRoom -> {
