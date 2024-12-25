@@ -132,6 +132,7 @@ data class GameRoom(
             RoomEvent.Rejoined -> {}
             is RoomEvent.Ready -> {
                 playerReady(event.playerId)
+                broadcastRoomState()
                 if (isAllPlayerReady()) {
                     transitionTo(RoomState.Countdown)
                 }
