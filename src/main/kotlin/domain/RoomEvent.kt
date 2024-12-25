@@ -10,6 +10,9 @@ import model.Player
 sealed class RoomEvent {
 
     @Serializable
+    data object Status : RoomEvent()
+
+    @Serializable
     data class Created(val player: Player) : RoomEvent()
 
     @Serializable

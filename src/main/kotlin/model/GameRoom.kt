@@ -155,6 +155,10 @@ data class GameRoom(
                 broadcast(disconnectMessage)
                 transitionTo(RoomState.Pausing)
             }
+
+            RoomEvent.Status -> {
+                broadcastRoomState()
+            }
         }
     }
 
