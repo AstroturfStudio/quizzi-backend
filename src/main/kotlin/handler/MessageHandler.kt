@@ -65,13 +65,21 @@ class MessageHandler private constructor() {
                     val room = RoomManagerService.INSTANCE.getRoomById(clientMessage.roomId)
                     val player = PlayerManagerService.INSTANCE.getPlayer(playerId)
 
-                    RoomManagerService.INSTANCE.joinRoom(player, clientMessage.roomId)
+                    val joinable = RoomManagerService.INSTANCE.rejoinRoom(player, clientMessage.roomId)
 
-                    SessionManagerService.INSTANCE.getPlayerSession(playerId)
-                        ?.let { RoomBroadcastService.INSTANCE.subscribe(clientMessage.roomId, it) }
+                    if (joinable) {
+                        SessionManagerService.INSTANCE.getPlayerSession(playerId)
+                            ?.let { RoomBroadcastService.INSTANCE.subscribe(clientMessage.roomId, it) }
 
-                    room.handleEvent(RoomEvent.Joined(player))
-                    room.handleEvent(RoomEvent.Ready(playerId))
+                        room.handleEvent(RoomEvent.Joined(player))
+                        room.handleEvent(RoomEvent.Ready(playerId))
+                    } else {
+                        val response = ServerSocketMessage.JoinedRoom(
+                            clientMessage.roomId,
+                            success = false
+                        )
+                        SessionManagerService.INSTANCE.broadcastToPlayers(mutableListOf(playerId), response)
+                    }
                 }
 
                 is ClientSocketMessage.PlayerReady -> {

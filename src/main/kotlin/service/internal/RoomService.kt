@@ -49,6 +49,20 @@ class RoomService {
         return true
     }
 
+    fun rejoinRoom(player: Player, roomId: String): Boolean {
+        val disconnectedPlayer = disconnectedPlayers[player.id] ?: return false
+
+        val currentTime = System.currentTimeMillis()
+        val thirtyMinutesInMillis = 30 * 60 * 1000
+
+        if (disconnectedPlayer.roomId == roomId && (currentTime - disconnectedPlayer.disconnectTime) < thirtyMinutesInMillis) {
+            playerToRoom[player.id] = roomId
+            disconnectedPlayers.remove(player.id)
+            return true
+        }
+        return false
+    }
+
     suspend fun closeRoom(room: GameRoom) {
         room.getPlayers().forEach { player ->
             SessionManagerService.INSTANCE.removePlayerSession(player.id)

@@ -19,9 +19,6 @@ sealed class RoomEvent {
     data class Joined(val player: Player) : RoomEvent()
 
     @Serializable
-    data object Rejoined : RoomEvent()
-
-    @Serializable
     data class Ready(val playerId: String) : RoomEvent()
 
     @Serializable

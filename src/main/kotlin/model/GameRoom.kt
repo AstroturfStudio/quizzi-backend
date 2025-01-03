@@ -129,7 +129,6 @@ data class GameRoom(
                 broadcastRoomState()
             }
 
-            RoomEvent.Rejoined -> {}
             is RoomEvent.Ready -> {
                 playerReady(event.playerId)
                 broadcastRoomState()
@@ -149,12 +148,12 @@ data class GameRoom(
                 if (game.getState() is GameState.Over) {
                     return
                 }
+                transitionTo(RoomState.Pausing)
 
                 val disconnectMessage = ServerSocketMessage.PlayerDisconnected(
                     playerId = event.playerId
                 )
                 broadcast(disconnectMessage)
-                transitionTo(RoomState.Pausing)
             }
 
             RoomEvent.Status -> {
