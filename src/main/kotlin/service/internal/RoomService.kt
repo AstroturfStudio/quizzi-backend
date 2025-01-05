@@ -1,8 +1,7 @@
 package service.internal
 
 import domain.RoomEvent
-import exception.RoomIsEmpty
-import exception.RoomNotFound
+import exception.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -44,13 +43,23 @@ class RoomService {
         return room
     }
 
-    fun joinRoom(player: Player, roomId: String): Boolean {
+    fun joinRoom(player: Player, roomId: String) {
+        val room = rooms[roomId] ?: throw RoomNotFound(roomId)
+        val disconnectedPlayer = disconnectedPlayers[player.id]
+        val playerInRoom = playerToRoom[player.id]
+
+        if (playerInRoom != null || disconnectedPlayer != null) {
+            throw AlreadyInAnotherRoom()
+        }
+        if (room.getPlayerCount() >= room.game.maxPlayerCount()) {
+            throw TooMuchPlayersInRoom()
+        }
+
         playerToRoom[player.id] = roomId
-        return true
     }
 
     fun rejoinRoom(player: Player, roomId: String): Boolean {
-        val disconnectedPlayer = disconnectedPlayers[player.id] ?: return false
+        val disconnectedPlayer = disconnectedPlayers[player.id] ?: throw NotYourRoom()
 
         val currentTime = System.currentTimeMillis()
         val thirtyMinutesInMillis = 30 * 60 * 1000
