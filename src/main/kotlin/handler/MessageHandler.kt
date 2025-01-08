@@ -1,11 +1,13 @@
 package handler
 
+import domain.GameEvent
+import domain.RoomEvent
 import exception.BusinessError
 import kotlinx.serialization.json.Json
 import request.ClientSocketMessage
 import response.ServerSocketMessage
-import service.GameFactory
 import service.PlayerManagerService
+import service.RoomBroadcastService
 import service.RoomManagerService
 import service.SessionManagerService
 
@@ -19,56 +21,77 @@ class MessageHandler private constructor() {
 
     private val json = Json { ignoreUnknownKeys = true }
 
+
     suspend fun handleMessage(playerId: String, message: String) {
         try {
             when (val clientMessage = json.decodeFromString<ClientSocketMessage>(message)) {
                 is ClientSocketMessage.CreateRoom -> {
                     val player = PlayerManagerService.INSTANCE.getPlayer(playerId)
-                    val roomId =
+                    val room =
                         RoomManagerService.INSTANCE.createRoom(
                             "${player.name}'s Room",
                             playerId,
-                            GameFactory.GameType.RESISTANCE_GAME
+                            clientMessage.categoryId,
+                            clientMessage.gameType
                         )
                     val response = ServerSocketMessage.RoomCreated(
-                        roomId = roomId
+                        roomId = room.id
                     )
+                    SessionManagerService.INSTANCE.getPlayerSession(playerId)
+                        ?.let { RoomBroadcastService.INSTANCE.subscribe(room.id, it) }
                     SessionManagerService.INSTANCE.broadcastToPlayers(mutableListOf(playerId), response)
+                    room.handleEvent(RoomEvent.Status)
                 }
 
                 is ClientSocketMessage.JoinRoom -> {
-                    val success = RoomManagerService.INSTANCE.joinRoom(playerId, clientMessage.roomId)
+                    val room = RoomManagerService.INSTANCE.getRoomById(clientMessage.roomId)
+                    val player = PlayerManagerService.INSTANCE.getPlayer(playerId)
+
+                    RoomManagerService.INSTANCE.joinRoom(player, clientMessage.roomId)
+
+                    SessionManagerService.INSTANCE.getPlayerSession(playerId)
+                        ?.let { RoomBroadcastService.INSTANCE.subscribe(clientMessage.roomId, it) }
+
+                    room.handleEvent(RoomEvent.Joined(player))
                     val response = ServerSocketMessage.JoinedRoom(
                         clientMessage.roomId,
-                        success = success
+                        success = true
                     )
+
                     SessionManagerService.INSTANCE.broadcastToPlayers(mutableListOf(playerId), response)
                 }
 
                 is ClientSocketMessage.RejoinRoom -> {
-                    val success = RoomManagerService.INSTANCE.rejoinRoom(playerId, clientMessage.roomId)
-                    val response = ServerSocketMessage.RejoinedRoom(
-                        clientMessage.roomId,
-                        playerId,
-                        success = success
-                    )
-                    SessionManagerService.INSTANCE.broadcastToPlayers(mutableListOf(playerId), response)
-                    if (success) {
-                        RoomManagerService.INSTANCE.startGame(clientMessage.roomId)
+                    val room = RoomManagerService.INSTANCE.getRoomById(clientMessage.roomId)
+                    val player = PlayerManagerService.INSTANCE.getPlayer(playerId)
+
+                    val joinable = RoomManagerService.INSTANCE.rejoinRoom(player, clientMessage.roomId)
+
+                    if (joinable) {
+                        SessionManagerService.INSTANCE.getPlayerSession(playerId)
+                            ?.let { RoomBroadcastService.INSTANCE.subscribe(clientMessage.roomId, it) }
+
+                        room.handleEvent(RoomEvent.Joined(player))
+                        room.handleEvent(RoomEvent.Ready(playerId))
+                    } else {
+                        val response = ServerSocketMessage.JoinedRoom(
+                            clientMessage.roomId,
+                            success = false
+                        )
+                        SessionManagerService.INSTANCE.broadcastToPlayers(mutableListOf(playerId), response)
                     }
                 }
 
                 is ClientSocketMessage.PlayerReady -> {
-                    val isAllPlayersReady = RoomManagerService.INSTANCE.playerReady(playerId)
-                    if (isAllPlayersReady) {
-                        val roomId = RoomManagerService.INSTANCE.getRoomIdFromPlayerId(playerId)
-                        RoomManagerService.INSTANCE.startGame(roomId)
-                    }
+                    val room = RoomManagerService.INSTANCE.getRoomByPlayerId(playerId)
+                    room.handleEvent(RoomEvent.Ready(playerId))
                 }
 
                 is ClientSocketMessage.PlayerAnswer -> {
-                    val roomId = RoomManagerService.INSTANCE.getRoomIdFromPlayerId(playerId)
-                    RoomManagerService.INSTANCE.playerAnswered(roomId, playerId, clientMessage.answer)
+                    val room = RoomManagerService.INSTANCE.getRoomByPlayerId(playerId)
+                    val player = PlayerManagerService.INSTANCE.getPlayer(playerId)
+
+                    room.game.handleEvent(GameEvent.RoundAnswered(player, clientMessage.answer))
                 }
             }
         } catch (e: BusinessError) {
@@ -77,7 +100,11 @@ class MessageHandler private constructor() {
     }
 
     suspend fun handleDisconnect(playerId: String) {
-        SessionManagerService.INSTANCE.removePlayerSession(playerId)
-        RoomManagerService.INSTANCE.playerDisconnected(playerId)
+        try {
+            SessionManagerService.INSTANCE.removePlayerSession(playerId)
+            RoomManagerService.INSTANCE.playerDisconnected(playerId)
+        } catch (e: BusinessError) {
+            println("Business error ${e.message}")
+        }
     }
 }
