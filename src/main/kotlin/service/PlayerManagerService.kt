@@ -18,5 +18,4 @@ class PlayerManagerService private constructor() {
     fun deletePlayer(id: String) = playerService.deletePlayer(id)
 
     fun getPlayer(id: String) = playerService.getPlayer(id)
-
 }

@@ -2,6 +2,7 @@ package service.internal
 
 import domain.RoomEvent
 import exception.*
+import java.util.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -13,6 +14,7 @@ import service.GameFactory
 import service.RoomBroadcastService
 import service.SessionManagerService
 import state.RoomState
+import util.Logger
 import java.util.*
 
 /**
@@ -24,7 +26,8 @@ class RoomService {
 
     private val playerToRoom = Collections.synchronizedMap(mutableMapOf<String, String>())
 
-    private val disconnectedPlayers = Collections.synchronizedMap(mutableMapOf<String, DisconnectedPlayer>())
+    private val disconnectedPlayers =
+            Collections.synchronizedMap(mutableMapOf<String, DisconnectedPlayer>())
 
     fun getAllRooms(): MutableMap<String, GameRoom> = rooms
 
@@ -32,30 +35,38 @@ class RoomService {
 
     fun getRoomByPlayerId(playerId: String) = rooms[playerToRoom[playerId]] ?: throw RoomNotFound("from PlayerId")
 
-    suspend fun createRoom(roomName: String, creator: Player, gameCategoryId: Int, gameType: String): GameRoom {
+    suspend fun createRoom(
+            roomName: String,
+            creator: Player,
+            gameCategoryId: Int,
+            gameType: String
+    ): GameRoom {
         val roomId = UUID.randomUUID().toString()
         val game = GameFactory.INSTANCE.createGame(roomId, gameCategoryId, gameType, roomId)
         val room = GameRoom(roomId, roomName, game)
-        rooms[roomId] = room
-        playerToRoom[creator.id] = roomId
+        synchronized(this) {
+            rooms[roomId] = room
+            playerToRoom[creator.id] = roomId
+        }
         room.handleEvent(RoomEvent.Created(creator))
-        println("Room $roomId created by player ${creator.id}")
+        Logger.i("Room $roomId created by player ${creator.id}")
         return room
     }
 
     fun joinRoom(player: Player, roomId: String) {
-        val room = rooms[roomId] ?: throw RoomNotFound(roomId)
-        val disconnectedPlayer = disconnectedPlayers[player.id]
-        val playerInRoom = playerToRoom[player.id]
+        synchronized(this) {
+            val room = rooms[roomId] ?: throw RoomNotFound(roomId)
+            val disconnectedPlayer = disconnectedPlayers[player.id]
+            val playerInRoom = playerToRoom[player.id]
 
-        if (playerInRoom != null || disconnectedPlayer != null) {
-            throw AlreadyInAnotherRoom()
+            if (playerInRoom != null || disconnectedPlayer != null) {
+                throw AlreadyInAnotherRoom()
+            }
+            if (room.getPlayerCount() >= room.game.maxPlayerCount()) {
+                throw TooMuchPlayersInRoom()
+            }
+            playerToRoom[player.id] = roomId
         }
-        if (room.getPlayerCount() >= room.game.maxPlayerCount()) {
-            throw TooMuchPlayersInRoom()
-        }
-
-        playerToRoom[player.id] = roomId
     }
 
     fun rejoinRoom(player: Player, roomId: String): Boolean {
@@ -73,13 +84,19 @@ class RoomService {
     }
 
     suspend fun closeRoom(room: GameRoom) {
-        room.getPlayers().forEach { player ->
-            SessionManagerService.INSTANCE.removePlayerSession(player.id)
-            playerToRoom.remove(player.id)
+        val playerIds: List<String>
+        synchronized(this) {
+            playerIds = room.getPlayers().map { player ->
+                playerToRoom.remove(player.id)
+                player.id
+            }
+            rooms.remove(room.id)
+        }
+        playerIds.forEach { playerId ->
+            SessionManagerService.INSTANCE.removePlayerSession(playerId)
         }
         RoomBroadcastService.INSTANCE.deleteRoom(room.id)
-        rooms.remove(room.id)
-        print("${room.id} room is cleaned!")
+        Logger.i("${room.id} room is cleaned!")
     }
 
     suspend fun playerDisconnected(disconnectedPlayerId: String) {
@@ -103,7 +120,7 @@ class RoomService {
                 delay(20000)
                 if (room.getState() is RoomState.Pausing) {
                     room.transitionTo(RoomState.Closing)
-                    println("Player $disconnectedPlayerId did not reconnect within 30 seconds, cleaning up room ${room.id}")
+                    Logger.i("Player $disconnectedPlayerId did not reconnect within 30 seconds, cleaning up room ${room.id}")
                 }
                 disconnectedPlayers.remove(disconnectedPlayerId)
             }

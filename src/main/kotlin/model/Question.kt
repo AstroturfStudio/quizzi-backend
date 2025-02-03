@@ -7,13 +7,13 @@ import kotlinx.serialization.Serializable
 data class Question(
     val id: Int,
     val categoryId: Int,
-    val imageUrl: String?,
+    val imageCode: String?,
     val content: String,
     val options: List<Option>,
     val answer: Int
 ) {
     fun toDTO() = QuestionDTO(
-        imageUrl = imageUrl,
+        imageCode = imageCode,
         content = content,
         options = options
     )

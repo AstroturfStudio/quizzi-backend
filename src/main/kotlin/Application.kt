@@ -9,6 +9,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
 import io.ktor.websocket.*
+import kotlinx.coroutines.channels.ClosedReceiveChannelException
 import kotlinx.serialization.json.Json
 import router.gameRoutes
 import router.playerRoutes
@@ -16,6 +17,7 @@ import router.roomRoutes
 import service.PlayerManagerService
 import service.SessionManagerService
 import java.time.Duration
+import util.Logger
 
 fun main() {
     embeddedServer(Netty, port = System.getenv("PORT")?.toInt() ?: 8080) {
@@ -24,7 +26,6 @@ fun main() {
 }
 
 fun Application.module() {
-
     install(ContentNegotiation) {
         json(Json {
             prettyPrint = true
@@ -42,7 +43,7 @@ fun Application.module() {
 
     routing {
         get("/") {
-            call.respondText("models.Flag Quiz Game Server Running!")
+            call.respondText("Flag Quiz Game Server Running!")
         }
 
         roomRoutes()
@@ -50,36 +51,47 @@ fun Application.module() {
         gameRoutes()
 
         webSocket("/game") {
-            val playerId = call.parameters["playerId"]//call.request.headers["playerId"]
-
-            if (playerId == null) {
+            val playerId = call.parameters["playerId"] ?: run {
+                Logger.w("WebSocket connection attempt without playerId")
                 close(CloseReason(CloseReason.Codes.VIOLATED_POLICY, "Missing playerId"))
                 return@webSocket
             }
-            println("New WebSocket connection: $playerId")
+
+            Logger.i("New WebSocket connection: $playerId")
+            
             try {
-                PlayerManagerService.INSTANCE.getPlayer(playerId)
+                val player = PlayerManagerService.INSTANCE.getPlayer(playerId)
+                
                 SessionManagerService.INSTANCE.addPlayerToSession(playerId, this)
+                Logger.i("Player $playerId added to session")
 
-                for (frame in incoming) {
-                    when (frame) {
-                        is Frame.Text -> {
-                            val text = frame.readText()
-                            MessageHandler.INSTANCE.handleMessage(playerId, text)
+                try {
+                    for (frame in incoming) {
+                        when (frame) {
+                            is Frame.Text -> {
+                                val text = frame.readText()
+                                Logger.d("Received message from player $playerId: $text")
+                                MessageHandler.INSTANCE.handleMessage(playerId, text)
+                            }
+                            is Frame.Close -> {
+                                Logger.i("Received close frame from player $playerId")
+                            }
+                            else -> {
+                                Logger.w("Received unsupported frame type from player $playerId: ${frame.frameType}")
+                            }
                         }
-
-                        is Frame.Close -> {}
-
-                        else -> {}
                     }
+                } catch (e: ClosedReceiveChannelException) {
+                    Logger.i("WebSocket connection closed normally for player $playerId")
                 }
             } catch (e: SocketCloseError) {
-                println("Error in WebSocket connection: ${e.message}")
-                close(CloseReason(CloseReason.Codes.INTERNAL_ERROR, e.message))
+                Logger.e("Socket close error for player $playerId: ${e.message}")
+                close(CloseReason(CloseReason.Codes.INTERNAL_ERROR, e.message ?: "Socket close error"))
             } catch (e: Exception) {
+                Logger.e("Unexpected error for player $playerId", e)
                 close(CloseReason(CloseReason.Codes.VIOLATED_POLICY, "Unexpected Error!"))
             } finally {
-                println("WebSocket connection terminated for player $playerId")
+                Logger.i("WebSocket connection terminated for player $playerId")
                 MessageHandler.INSTANCE.handleDisconnect(playerId)
             }
         }

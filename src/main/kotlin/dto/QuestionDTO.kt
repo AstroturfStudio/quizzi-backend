@@ -8,7 +8,7 @@ import model.Option
  */
 @Serializable
 data class QuestionDTO(
-    val imageUrl: String?,
+    val imageCode: String?,
     val content: String,
     val options: List<Option>
 )

@@ -4,6 +4,7 @@ import io.ktor.websocket.*
 import kotlinx.serialization.json.Json
 import response.ServerSocketMessage
 import java.util.*
+import util.Logger
 
 /**
  * @author guvencenanguvenal
@@ -23,6 +24,7 @@ class SessionManagerService private constructor() {
 
     fun addPlayerToSession(playerId: String, session: DefaultWebSocketSession) {
         playerSessions[playerId] = session
+        Logger.i("Session added for player: $playerId")
     }
 
     suspend fun removePlayerSession(playerId: String) {
@@ -37,7 +39,7 @@ class SessionManagerService private constructor() {
             if (session != null) {
                 sessions.add(session)
             } else {
-                println("No session found for player $playerId")
+                Logger.i("No session found for player $playerId")
             }
         }
         sessions.forEach { session ->
