@@ -12,7 +12,7 @@ class GameFactory private constructor() {
         val INSTANCE: GameFactory by lazy(LazyThreadSafetyMode.SYNCHRONIZED) { GameFactory() }
 
         fun getAllGameTypes(): Set<String> {
-            return mutableSetOf("ResistanceGame")
+            return mutableSetOf("ResistanceGame", "ResistToTimeGame")
         }
     }
 

@@ -12,6 +12,7 @@ import service.RoomManagerService
 import state.GameState
 import state.PlayerState
 import state.RoomState
+import util.Logger
 import java.util.*
 
 @Serializable
@@ -173,12 +174,12 @@ data class GameRoom(
     /////////////////////////////////
 
     private suspend fun broadcast(message: ServerSocketMessage) {
-        println("Broadcasting message to room ${id}: $message")
+        Logger.i("Broadcasting message to room ${id}: $message")
         RoomBroadcastService.INSTANCE.broadcast(id, message)
     }
 
     private suspend fun broadcastRoomState() {
-        println("Broadcasting game state for room $id")
+        Logger.i("Broadcasting game state for room $id")
 
         val gameUpdate = ServerSocketMessage.RoomUpdate(
             players = players.map { it.toDTO() },
@@ -213,12 +214,11 @@ data class GameRoom(
     }
 
     private suspend fun countdownBeforeStart() {
-        println("Starting countdown for room $id")
+        Logger.i("Starting countdown for room $id")
         for (timeLeft in COUNTDOWN_TIME downTo 1) {
             delay(1000)
             val countdownTimeUpdate = ServerSocketMessage.CountdownTimeUpdate(remaining = timeLeft)
             broadcast(countdownTimeUpdate)
         }
         delay(1000)
-    }
-}
+    }}

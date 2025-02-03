@@ -10,6 +10,7 @@ import service.PlayerManagerService
 import service.RoomBroadcastService
 import service.RoomManagerService
 import service.SessionManagerService
+import util.Logger
 
 /**
  * @author guvencenanguvenal
@@ -95,7 +96,7 @@ class MessageHandler private constructor() {
                 }
             }
         } catch (e: BusinessError) {
-            println("Business error ${e.message}")
+            Logger.i("Business error ${e.message}")
         }
     }
 
@@ -104,7 +105,7 @@ class MessageHandler private constructor() {
             SessionManagerService.INSTANCE.removePlayerSession(playerId)
             RoomManagerService.INSTANCE.playerDisconnected(playerId)
         } catch (e: BusinessError) {
-            println("Business error ${e.message}")
+            Logger.i("Business error ${e.message}")
         }
     }
 }

@@ -20,7 +20,7 @@ object QuestionDatabase {
         return Question(
             id = question.id,
             categoryId = question.categoryId,
-            imageUrl = question.imageUrl,
+            imageCode = question.imageCode,
             content = question.content,
             options = question.options.shuffled(),
             answer = question.answer
