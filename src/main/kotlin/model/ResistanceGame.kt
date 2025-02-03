@@ -23,8 +23,8 @@ class ResistanceGame(
     whichRoomInIt: String,
     players: MutableSet<PlayerInGame> = mutableSetOf(),
     rounds: MutableList<Round> = mutableListOf(),
-    private var cursorPosition: Float = 0.5f
-) : Game(id, whichRoomInIt, categoryId, players, rounds) {
+    override var cursorPosition: Float = 0.5f
+) : Game(id, whichRoomInIt, categoryId, players, rounds), CursorBasedGame{
 
     companion object {
         private const val ROUND_TIME_SECONDS = 10L
@@ -156,7 +156,7 @@ class ResistanceGame(
             GameEvent.RoundEnded -> {
                 calculateResult()
                 val lastRound = getLastRound()
-                val roundEnded = ServerSocketMessage.RoundEnded(
+                val roundEnded = ServerSocketMessage.RoundEnded.CursorRoundEnded(
                     cursorPosition = cursorPosition,
                     correctAnswer = lastRound.question.answer,
                     winnerPlayerId = lastRound.roundWinnerPlayer()?.id
@@ -170,9 +170,7 @@ class ResistanceGame(
 
     /////////////////////////////
 
-    private fun gameOver(): Boolean {
-        return cursorPosition <= 0f || cursorPosition >= 1f
-    }
+    private fun gameOver(): Boolean = isCursorAtLimit()
 
     private suspend fun nextRound(): Round {
         val roundNumber = rounds.size + 1
@@ -208,11 +206,7 @@ class ResistanceGame(
             val currentPosition = cursorPosition
             val movement = if (roundWinnerIndex == 0) -0.1f else 0.1f
             val newPosition = currentPosition + movement
-            cursorPosition = when {
-                newPosition <= 0.1f -> 0f  // Sol limit
-                newPosition >= 0.9f -> 1f  // Sağ limit
-                else -> newPosition
-            }
+            updateCursorPosition(newPosition)
         }
     }
 
@@ -226,5 +220,17 @@ class ResistanceGame(
 
     override fun getLastRound(): Round {
         return rounds.last()
+    }
+
+    override fun updateCursorPosition(newPosition: Float) {
+        cursorPosition = when {
+            newPosition <= 0.1f -> 0f
+            newPosition >= 0.9f -> 1f
+            else -> newPosition
+        }
+    }
+
+    override fun isCursorAtLimit(): Boolean {
+        return cursorPosition <= 0f || cursorPosition >= 1f
     }
 }
