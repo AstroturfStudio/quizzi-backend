@@ -56,10 +56,9 @@ class RoomService {
     fun joinRoom(player: Player, roomId: String) {
         synchronized(this) {
             val room = rooms[roomId] ?: throw RoomNotFound(roomId)
-            val disconnectedPlayer = disconnectedPlayers[player.id]
             val playerInRoom = playerToRoom[player.id]
 
-            if (playerInRoom != null || disconnectedPlayer != null) {
+            if (playerInRoom != null) {
                 throw AlreadyInAnotherRoom()
             }
             if (room.getPlayerCount() >= room.game.maxPlayerCount()) {
@@ -117,7 +116,7 @@ class RoomService {
             playerToRoom.remove(disconnectedPlayerId)
 
             CoroutineScope(Dispatchers.Default).launch {
-                delay(20000)
+                delay(30000)
                 if (room.getState() is RoomState.Pausing) {
                     room.transitionTo(RoomState.Closing)
                     Logger.i("Player $disconnectedPlayerId did not reconnect within 30 seconds, cleaning up room ${room.id}")
