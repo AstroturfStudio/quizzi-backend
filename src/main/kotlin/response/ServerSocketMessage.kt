@@ -84,11 +84,25 @@ sealed class ServerSocketMessage {
 
     @Serializable
     @SerialName("RoundEnded")
-    data class RoundEnded(
-        val cursorPosition: Float,
-        val correctAnswer: Int,
-        val winnerPlayerId: String?
-    ) : ServerSocketMessage()
+    sealed class RoundEnded : ServerSocketMessage() {
+        abstract val correctAnswer: Int
+        abstract val winnerPlayerId: String?
+
+        @Serializable
+        @SerialName("CursorRoundEnded")
+        data class CursorRoundEnded(
+            val cursorPosition: Float,
+            override val correctAnswer: Int,
+            override val winnerPlayerId: String?
+        ) : RoundEnded()
+
+        @Serializable
+        @SerialName("StandardRoundEnded")
+        data class StandardRoundEnded(
+            override val correctAnswer: Int,
+            override val winnerPlayerId: String?
+        ) : RoundEnded()
+    }
 
     @Serializable
     @SerialName("PlayerDisconnected")
