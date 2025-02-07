@@ -30,7 +30,7 @@ class MessageHandler private constructor() {
                     val player = PlayerManagerService.INSTANCE.getPlayer(playerId)
                     val room =
                         RoomManagerService.INSTANCE.createRoom(
-                            "${player.name}'s Room",
+                            clientMessage.roomName ?: "${player.name}'s Room",
                             playerId,
                             clientMessage.categoryId,
                             clientMessage.gameType
