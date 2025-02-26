@@ -43,6 +43,8 @@ class RoomManagerService private constructor() {
                 id = id,
                 name = room.name,
                 playerCount = room.getPlayerCount(),
+                category = CategoryService.getCategoryById(room.game.categoryId).name,
+                gameType = room.game.type,
                 roomState = room.getState(),
                 players = room.getPlayerNames()
             )

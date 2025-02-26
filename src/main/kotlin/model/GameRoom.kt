@@ -1,12 +1,14 @@
 package model
 
 import domain.RoomEvent
+import dto.GameRoomDTO
 import exception.RoomIsEmpty
 import exception.TooMuchPlayersInRoom
 import exception.WrongCommandWrongTime
 import kotlinx.coroutines.*
 import kotlinx.serialization.Serializable
 import response.ServerSocketMessage
+import service.CategoryService
 import service.RoomBroadcastService
 import service.RoomManagerService
 import state.GameState
@@ -181,9 +183,19 @@ data class GameRoom(
     private suspend fun broadcastRoomState() {
         Logger.i("Broadcasting game state for room $id")
 
+
         val gameUpdate = ServerSocketMessage.RoomUpdate(
             players = players.map { it.toDTO() },
             state = state,
+            gameRoom = GameRoomDTO(
+                id,
+                name,
+                players.size,
+                game.type,
+                CategoryService.getCategoryById(game.categoryId).name,
+                players.map { it.name },
+                state
+            )
         )
         broadcast(gameUpdate)
     }
@@ -221,4 +233,5 @@ data class GameRoom(
             broadcast(countdownTimeUpdate)
         }
         delay(1000)
-    }}
+    }
+}
