@@ -24,7 +24,7 @@ class ResistanceGame(
     players: MutableSet<PlayerInGame> = mutableSetOf(),
     rounds: MutableList<Round> = mutableListOf(),
     override var cursorPosition: Float = 0.5f
-) : Game(id, whichRoomInIt, categoryId, players, rounds), CursorBasedGame{
+) : Game(id, "ResistanceGame", whichRoomInIt, categoryId, players, rounds), CursorBasedGame{
 
     companion object {
         private const val ROUND_TIME_SECONDS = 10L

@@ -11,6 +11,7 @@ import java.util.*
 @Serializable
 abstract class Game(
     val id: String,
+    val type: String,
     val whichRoomInIt: String,
     val categoryId: Int,
     val players: MutableSet<PlayerInGame> = Collections.synchronizedSet(mutableSetOf()),

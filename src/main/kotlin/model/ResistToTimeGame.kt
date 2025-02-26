@@ -24,7 +24,7 @@ class ResistToTimeGame(
     players: MutableSet<PlayerInGame> = mutableSetOf(),
     rounds: MutableList<Round> = mutableListOf(),
     override var cursorPosition: Float = 0.5f,
-) : Game(id, whichRoomInIt, categoryId, players, rounds),
+) : Game(id,"ResistToTimeGame", whichRoomInIt, categoryId, players, rounds),
     CursorBasedGame {
 
     companion object {

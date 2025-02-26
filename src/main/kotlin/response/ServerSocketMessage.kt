@@ -1,10 +1,12 @@
 package response
 
+import dto.GameRoomDTO
 import dto.PlayerDTO
 import dto.QuestionDTO
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonClassDiscriminator
+import model.GameRoom
 import state.RoomState
 
 /**
@@ -45,7 +47,8 @@ sealed class ServerSocketMessage {
     @SerialName("RoomUpdate")
     data class RoomUpdate(
         val players: List<PlayerDTO>,
-        val state: RoomState,
+        val state: RoomState, //TODO deprecated
+        val gameRoom: GameRoomDTO
     ) : ServerSocketMessage()
 
     @Serializable
