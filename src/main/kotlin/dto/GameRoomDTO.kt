@@ -9,7 +9,7 @@ data class GameRoomDTO(
     val name: String,
     val playerCount: Int,
     val gameType: String,
-    val category: String,
+    val category: CategoryDTO,
     val players: List<String>,
     val roomState: RoomState,
 )

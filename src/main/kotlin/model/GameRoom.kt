@@ -192,7 +192,7 @@ data class GameRoom(
                 name,
                 players.size,
                 game.type,
-                CategoryService.getCategoryById(game.categoryId).name,
+                CategoryService.getCategoryById(game.categoryId).toDto(),
                 players.map { it.name },
                 state
             )
