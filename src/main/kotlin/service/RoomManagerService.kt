@@ -4,6 +4,7 @@ import dto.GameRoomDTO
 import model.GameRoom
 import model.Player
 import service.internal.RoomService
+import state.RoomState
 
 /**
  * @author guvencenanguvenal
@@ -38,16 +39,18 @@ class RoomManagerService private constructor() {
     }
 
     fun getActiveRooms(): List<GameRoomDTO> {
-        return roomService.getAllRooms().map { (id, room) ->
-            GameRoomDTO(
-                id = id,
-                name = room.name,
-                playerCount = room.getPlayerCount(),
-                category = CategoryService.getCategoryById(room.game.categoryId).name,
-                gameType = room.game.type,
-                roomState = room.getState(),
-                players = room.getPlayerNames()
-            )
-        }
+        return roomService.getAllRooms()
+            .filter { (_, room) -> room.getState() != RoomState.Closing }
+            .map { (id, room) ->
+                GameRoomDTO(
+                    id = id,
+                    name = room.name,
+                    playerCount = room.getPlayerCount(),
+                    category = CategoryService.getCategoryById(room.game.categoryId).name,
+                    gameType = room.game.type,
+                    roomState = room.getState(),
+                    players = room.getPlayerNames()
+                )
+            }
     }
 }
