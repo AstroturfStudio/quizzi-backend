@@ -9,7 +9,9 @@ class CategoryService {
     companion object {
 
         private val FIRST = 0;
-        private val categories: MutableSet<Category> = mutableSetOf(Category(1, "Flag Quiz"))
+        private val categories: MutableSet<Category> = mutableSetOf(
+            Category(1, "Flag Quiz"), Category(2, "Country Capitals Quiz")
+        )
 
         fun getAllCategories(): MutableSet<Category> {
             return categories
