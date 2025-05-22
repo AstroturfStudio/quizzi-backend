@@ -10,7 +10,8 @@ class CategoryService {
 
         private val FIRST = 0;
         private val categories: MutableSet<Category> = mutableSetOf(
-            Category(1, "Flag Quiz"), Category(2, "Country Capitals Quiz")
+            Category(1, "Flag Quiz"), Category(2, "Country Capitals Quiz"),
+            Category(3, "Hollywood Stars Quiz")
         )
 
         fun getAllCategories(): MutableSet<Category> {

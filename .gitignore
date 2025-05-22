@@ -49,3 +49,4 @@ bin/
 .env
 *.env
 /logs/quizzi.log
+/.cursor/
