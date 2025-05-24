@@ -94,13 +94,19 @@ class ResistToTimeGame(
             }
 
             GameState.Pause -> {
-                getLastRound().transitionTo(RoundState.Interrupt)
+                if (state is GameState.Playing) {
+                    getLastRound().transitionTo(RoundState.Interrupt)
+                }
                 //rounds.removeAt(rounds.size - 1) TODO gerek yok gibi
             }
 
             GameState.Over -> {
                 rounds.forEach { round -> round.job?.cancel() }
-                broadcast(ServerSocketMessage.GameOver(winnerPlayerId = getLastRound().roundWinnerPlayer()?.id))
+                if (state is GameState.Playing) {
+                    broadcast(ServerSocketMessage.GameOver(winnerPlayerId = getLastRound().roundWinnerPlayer()?.id))
+                } else {
+                    broadcast(ServerSocketMessage.GameOver(winnerPlayerId = null))
+                }
             }
         }
     }
