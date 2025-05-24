@@ -102,8 +102,10 @@ class MessageHandler private constructor() {
 
     suspend fun handleDisconnect(playerId: String) {
         try {
-            SessionManagerService.INSTANCE.removePlayerSession(playerId)
-            RoomManagerService.INSTANCE.playerDisconnected(playerId)
+            val removePlayerSession = SessionManagerService.INSTANCE.removePlayerSession(playerId)
+            if (removePlayerSession) {
+                RoomManagerService.INSTANCE.playerDisconnected(playerId)
+            }
         } catch (e: BusinessError) {
             Logger.i("Business error ${e.message}")
         }

@@ -27,9 +27,13 @@ class SessionManagerService private constructor() {
         Logger.i("Session added for player: $playerId")
     }
 
-    suspend fun removePlayerSession(playerId: String) {
+    suspend fun removePlayerSession(playerId: String) : Boolean {
+        if (!playerSessions.containsKey(playerId)) {
+            return false
+        }
         playerSessions[playerId]?.close(reason = CloseReason(1, "Room closed"))
         playerSessions.remove(playerId)
+        return true
     }
 
     suspend fun broadcastToPlayers(playerIds: MutableList<String>, message: ServerSocketMessage) {
