@@ -24,11 +24,11 @@ class ResistToTimeGame(
     players: MutableSet<PlayerInGame> = mutableSetOf(),
     rounds: MutableList<Round> = mutableListOf(),
     override var cursorPosition: Float = 0.5f,
-) : Game(id,"ResistToTimeGame", whichRoomInIt, categoryId, players, rounds),
+) : Game(id, "ResistToTimeGame", whichRoomInIt, categoryId, players, rounds),
     CursorBasedGame {
 
     companion object {
-        private const val ROUND_TIME_SECONDS = 3L
+        private const val ROUND_TIME_SECONDS = 5L
         private const val MAX_PLAYERS = 1
     }
 
