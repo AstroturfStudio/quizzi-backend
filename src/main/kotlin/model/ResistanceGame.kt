@@ -101,7 +101,11 @@ class ResistanceGame(
 
             GameState.Over -> {
                 rounds.forEach { round -> round.job?.cancel() }
-                broadcast(ServerSocketMessage.GameOver(winnerPlayerId = getLastRound().roundWinnerPlayer()?.id))
+                if (state is GameState.Playing) {
+                    broadcast(ServerSocketMessage.GameOver(winnerPlayerId = getLastRound().roundWinnerPlayer()?.id))
+                } else {
+                    broadcast(ServerSocketMessage.GameOver(winnerPlayerId = null))
+                }
             }
         }
     }
