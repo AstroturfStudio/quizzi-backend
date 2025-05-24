@@ -87,7 +87,9 @@ data class GameRoom(
             }
 
             RoomState.Closing -> {
-                throw WrongCommandWrongTime()
+                if (event !is RoomEvent.Disconnected) {
+                    throw WrongCommandWrongTime()
+                }
             }
 
         }

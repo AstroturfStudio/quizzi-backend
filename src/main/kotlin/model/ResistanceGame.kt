@@ -93,7 +93,9 @@ class ResistanceGame(
             }
 
             GameState.Pause -> {
-                getLastRound().transitionTo(RoundState.Interrupt)
+                if (state is GameState.Playing) {
+                    getLastRound().transitionTo(RoundState.Interrupt)
+                }
                 //rounds.removeAt(rounds.size - 1) TODO gerek yok gibi
             }
 
