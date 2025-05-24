@@ -95,18 +95,14 @@ class ResistToTimeGame(
 
             GameState.Pause -> {
                 if (state is GameState.Playing) {
-                    getLastRound().transitionTo(RoundState.Interrupt)
+                    getLastRound()?.transitionTo(RoundState.Interrupt)
                 }
                 //rounds.removeAt(rounds.size - 1) TODO gerek yok gibi
             }
 
             GameState.Over -> {
                 rounds.forEach { round -> round.job?.cancel() }
-                if (state is GameState.Playing) {
-                    broadcast(ServerSocketMessage.GameOver(winnerPlayerId = getLastRound().roundWinnerPlayer()?.id))
-                } else {
-                    broadcast(ServerSocketMessage.GameOver(winnerPlayerId = null))
-                }
+                broadcast(ServerSocketMessage.GameOver(winnerPlayerId = getLastRound()?.roundWinnerPlayer()?.id))
             }
         }
     }
@@ -123,7 +119,7 @@ class ResistToTimeGame(
                 val roundStarted = ServerSocketMessage.RoundStarted(
                     roundNumber = round.number,
                     timeRemaining = getRoundTime(),
-                    currentQuestion = getLastRound().question.toDTO()
+                    currentQuestion = getLastRound()!!.question.toDTO()
                 )
                 broadcast(roundStarted)
                 round.job = CoroutineScope(Dispatchers.Default).launch {
@@ -135,7 +131,7 @@ class ResistToTimeGame(
                         }
                         delay(1000)
                         // Süre doldu mesajı
-                        val timeUpMessage = ServerSocketMessage.TimeUp(correctAnswer = getLastRound().question.answer)
+                        val timeUpMessage = ServerSocketMessage.TimeUp(correctAnswer = getLastRound()!!.question.answer)
                         broadcast(timeUpMessage)
                     } catch (e: CancellationException) {
                         // Timer iptal edildi
@@ -149,7 +145,7 @@ class ResistToTimeGame(
             }
 
             is GameEvent.RoundAnswered -> {
-                val lastRound = getLastRound()
+                val lastRound = getLastRound()!!
                 lastRound.handleEvent(RoundEvent.Answered(event.player, event.answer))
 
                 val answerResult = ServerSocketMessage.AnswerResult(
@@ -162,7 +158,7 @@ class ResistToTimeGame(
 
             GameEvent.RoundEnded -> {
                 calculateResult()
-                val lastRound = getLastRound()
+                val lastRound = getLastRound()!!
                 val roundEnded = ServerSocketMessage.RoundEnded.CursorRoundEnded(
                     cursorPosition = cursorPosition,
                     correctAnswer = lastRound.question.answer,
@@ -176,7 +172,7 @@ class ResistToTimeGame(
     }
 
     override fun calculateResult() {
-        val lastRound = getLastRound()
+        val lastRound = getLastRound()!!
 
         val roundWinnerPlayer = lastRound.roundWinnerPlayer()
 
@@ -201,8 +197,8 @@ class ResistToTimeGame(
         return ROUND_TIME_SECONDS
     }
 
-    override fun getLastRound(): Round {
-        return rounds.last()
+    override fun getLastRound(): Round? {
+        return rounds.lastOrNull()
     }
 
     /////////////////////////////

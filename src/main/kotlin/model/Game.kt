@@ -30,5 +30,5 @@ abstract class Game(
 
     abstract fun getRoundTime(): Long
 
-    abstract fun getLastRound(): Round
+    abstract fun getLastRound(): Round?
 }
