@@ -203,7 +203,7 @@
     {
       "id": 9,
       "categoryId": 4,
-      "imageCode": "star-wars-episode-IV",
+      "imageCode": "star-wars-episode-iv",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -228,7 +228,7 @@
     {
       "id": 10,
       "categoryId": 4,
-      "imageCode": "rocky-IV",
+      "imageCode": "rocky-iv",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -653,7 +653,7 @@
     {
       "id": 27,
       "categoryId": 4,
-      "imageCode": "indiana-jones&the-raiders-of-the-lost-ark",
+      "imageCode": "indiana-jones_and_the-raiders-of-the-lost-ark",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [

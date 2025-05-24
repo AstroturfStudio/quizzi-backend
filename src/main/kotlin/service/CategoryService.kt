@@ -10,8 +10,10 @@ class CategoryService {
 
         private val FIRST = 0;
         private val categories: MutableSet<Category> = mutableSetOf(
-            Category(1, "Flag Quiz"), Category(2, "Country Capitals Quiz"),
+            Category(1, "Flag Quiz"),
+            Category(2, "Country Capitals Quiz"),
             Category(3, "Hollywood Stars Quiz"),
+            Category(4, "Movie Posters"),
             Category(5, "Football Clubs' Logos Quiz")
         )
 
@@ -19,7 +21,7 @@ class CategoryService {
             return categories
         }
 
-        fun getCategoryById(id : Int): Category {
+        fun getCategoryById(id: Int): Category {
             return categories.filter { c -> c.id == id }[FIRST]
         }
     }
