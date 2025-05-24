@@ -43,9 +43,9 @@ class ResistToTimeGame(
 
         when (state) {
             GameState.Idle -> {
-                if (newState is GameState.Over) {
+                /*if (newState is GameState.Over) {
                     throw IllegalStateException("Invalid transition from Idle to $newState")
-                }
+                }*/
             }
 
             GameState.Playing -> {
