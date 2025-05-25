@@ -84,7 +84,7 @@ class RoomService {
 
     suspend fun closeRoom(room: GameRoom) {
         val playerIds: List<String>
-        synchronized(this) {
+        synchronized(playerToRoom) {
             room.getPlayers().forEach { player ->
                 playerToRoom.remove(player.id)
             }
@@ -103,6 +103,7 @@ class RoomService {
     suspend fun playerDisconnected(disconnectedPlayerId: String) {
         try {
             val room = getRoomByPlayerId(disconnectedPlayerId)
+            playerToRoom.remove(disconnectedPlayerId)
 
             try {
                 room.handleEvent(RoomEvent.Disconnected(disconnectedPlayerId))
@@ -115,7 +116,6 @@ class RoomService {
                 playerId = disconnectedPlayerId,
                 roomId = room.id
             )
-            playerToRoom.remove(disconnectedPlayerId)
 
             CoroutineScope(Dispatchers.Default).launch {
                 delay(30000)
