@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import response.ServerSocketMessage
+import service.GameFactory
 import service.RoomBroadcastService
 import state.GameState
 import state.RoundState
@@ -24,7 +25,7 @@ class ResistanceGame(
     players: MutableSet<PlayerInGame> = mutableSetOf(),
     rounds: MutableList<Round> = mutableListOf(),
     override var cursorPosition: Float = 0.5f
-) : Game(id, "ResistanceGame", whichRoomInIt, categoryId, players, rounds), CursorBasedGame{
+) : Game(id, GameFactory.resistanceGame, whichRoomInIt, categoryId, players, rounds), CursorBasedGame {
 
     companion object {
         private const val ROUND_TIME_SECONDS = 10L
