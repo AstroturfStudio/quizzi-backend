@@ -3,7 +3,7 @@
     {
       "id": 1,
       "categoryId": 4,
-      "imageCode": "wonder-woman",
+      "imageCode": "wonder_woman",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -53,7 +53,7 @@
     {
       "id": 3,
       "categoryId": 4,
-      "imageCode": "the-little-mermaid",
+      "imageCode": "the_little_mermaid",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -78,7 +78,7 @@
     {
       "id": 4,
       "categoryId": 4,
-      "imageCode": "the-godfather",
+      "imageCode": "the_godfather",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -103,7 +103,7 @@
     {
       "id": 5,
       "categoryId": 4,
-      "imageCode": "the-exorcist",
+      "imageCode": "the_exorcist",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -128,7 +128,7 @@
     {
       "id": 6,
       "categoryId": 4,
-      "imageCode": "the-dark-knight",
+      "imageCode": "the_dark_knight",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -142,7 +142,7 @@
         },
         {
           "id": 3,
-          "value": "Spider-Man"
+          "value": "Spider Man"
         },
         {
           "id": 4,
@@ -153,7 +153,7 @@
     {
       "id": 7,
       "categoryId": 4,
-      "imageCode": "the-bodyguard",
+      "imageCode": "the_bodyguard",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -178,7 +178,7 @@
     {
       "id": 8,
       "categoryId": 4,
-      "imageCode": "the-addams-family",
+      "imageCode": "the_addams_family",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -203,7 +203,7 @@
     {
       "id": 9,
       "categoryId": 4,
-      "imageCode": "star-wars-episode-iv",
+      "imageCode": "star_wars_episode_iv",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -228,7 +228,7 @@
     {
       "id": 10,
       "categoryId": 4,
-      "imageCode": "rocky-iv",
+      "imageCode": "rocky_iv",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -303,7 +303,7 @@
     {
       "id": 13,
       "categoryId": 4,
-      "imageCode": "independence-day",
+      "imageCode": "independence_day",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -328,7 +328,7 @@
     {
       "id": 14,
       "categoryId": 4,
-      "imageCode": "et-the-extra-terrestrial",
+      "imageCode": "et_the_extra_terrestrial",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -338,7 +338,7 @@
         },
         {
           "id": 2,
-          "value": "E.T. the Extra-Terrestrial"
+          "value": "E.T. the Extra Terrestrial"
         },
         {
           "id": 3,
@@ -353,7 +353,7 @@
     {
       "id": 15,
       "categoryId": 4,
-      "imageCode": "back-to-the-future",
+      "imageCode": "back_to_the_future",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -421,14 +421,14 @@
         },
         {
           "id": 4,
-          "value": "Spider-Man"
+          "value": "Spider Man"
         }
       ]
     },
     {
       "id": 18,
       "categoryId": 4,
-      "imageCode": "the-neverending-story",
+      "imageCode": "the_neverending_story",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -453,7 +453,7 @@
     {
       "id": 19,
       "categoryId": 4,
-      "imageCode": "the-matrix",
+      "imageCode": "the_matrix",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -478,7 +478,7 @@
     {
       "id": 20,
       "categoryId": 4,
-      "imageCode": "the-lion-king",
+      "imageCode": "the_lion_king",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -513,7 +513,7 @@
         },
         {
           "id": 2,
-          "value": "Spider-Man"
+          "value": "Spider Man"
         },
         {
           "id": 3,
@@ -528,7 +528,7 @@
     {
       "id": 22,
       "categoryId": 4,
-      "imageCode": "silence-of-the-lambs",
+      "imageCode": "silence_of_the_lambs",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -553,7 +553,7 @@
     {
       "id": 23,
       "categoryId": 4,
-      "imageCode": "pulp-fiction",
+      "imageCode": "pulp_fiction",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -653,7 +653,7 @@
     {
       "id": 27,
       "categoryId": 4,
-      "imageCode": "indiana-jones_and_the-raiders-of-the-lost-ark",
+      "imageCode": "indiana_jones_and_the_raiders_of_the_lost_ark",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -703,7 +703,7 @@
     {
       "id": 29,
       "categoryId": 4,
-      "imageCode": "harry-potter-and-the-sorcerers-stone",
+      "imageCode": "harry_potter_and_the_sorcerers_stone",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -728,7 +728,7 @@
     {
       "id": 30,
       "categoryId": 4,
-      "imageCode": "forrest-gump",
+      "imageCode": "forrest_gump",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -753,7 +753,7 @@
     {
       "id": 31,
       "categoryId": 4,
-      "imageCode": "black-swan",
+      "imageCode": "black_swan",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -803,7 +803,7 @@
     {
       "id": 33,
       "categoryId": 4,
-      "imageCode": "world-war-z",
+      "imageCode": "world_war_z",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -828,7 +828,7 @@
     {
       "id": 34,
       "categoryId": 4,
-      "imageCode": "the-terminator",
+      "imageCode": "the_terminator",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -853,7 +853,7 @@
     {
       "id": 35,
       "categoryId": 4,
-      "imageCode": "the-sound-of-music",
+      "imageCode": "the_sound_of_music",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -878,7 +878,7 @@
     {
       "id": 36,
       "categoryId": 4,
-      "imageCode": "the-martian",
+      "imageCode": "the_martian",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -903,7 +903,7 @@
     {
       "id": 37,
       "categoryId": 4,
-      "imageCode": "the-goonies",
+      "imageCode": "the_goonies",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -928,7 +928,7 @@
     {
       "id": 38,
       "categoryId": 4,
-      "imageCode": "rosemarys-baby",
+      "imageCode": "rosemarys_baby",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -978,7 +978,7 @@
     {
       "id": 40,
       "categoryId": 4,
-      "imageCode": "lord-of-the-rings",
+      "imageCode": "lord_of_the_rings",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -1003,7 +1003,7 @@
     {
       "id": 41,
       "categoryId": 4,
-      "imageCode": "la-la-land",
+      "imageCode": "la_la_land",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -1028,7 +1028,7 @@
     {
       "id": 42,
       "categoryId": 4,
-      "imageCode": "kill-bill-vol-1",
+      "imageCode": "kill_bill_vol_1",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -1053,7 +1053,7 @@
     {
       "id": 43,
       "categoryId": 4,
-      "imageCode": "how-the-grinch-stole-christmas",
+      "imageCode": "how_the_grinch_stole_christmas",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -1103,7 +1103,7 @@
     {
       "id": 45,
       "categoryId": 4,
-      "imageCode": "free-willy",
+      "imageCode": "free_willy",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -1128,7 +1128,7 @@
     {
       "id": 46,
       "categoryId": 4,
-      "imageCode": "edward-scissorhands",
+      "imageCode": "edward_scissorhands",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -1178,7 +1178,7 @@
     {
       "id": 48,
       "categoryId": 4,
-      "imageCode": "a-nightmare-on-elmstreet",
+      "imageCode": "a_nightmare_on_elmstreet",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -1228,7 +1228,7 @@
     {
       "id": 50,
       "categoryId": 4,
-      "imageCode": "toy-story",
+      "imageCode": "toy_story",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -1253,7 +1253,7 @@
     {
       "id": 51,
       "categoryId": 4,
-      "imageCode": "top-gun",
+      "imageCode": "top_gun",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -1278,7 +1278,7 @@
     {
       "id": 52,
       "categoryId": 4,
-      "imageCode": "the-outsiders",
+      "imageCode": "the_outsiders",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -1303,13 +1303,13 @@
     {
       "id": 53,
       "categoryId": 4,
-      "imageCode": "the-lego-movie",
+      "imageCode": "the_lego_movie",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
         {
           "id": 1,
-          "value": "Wreck-It Ralph"
+          "value": "Wreck It Ralph"
         },
         {
           "id": 2,
@@ -1328,7 +1328,7 @@
     {
       "id": 54,
       "categoryId": 4,
-      "imageCode": "the-karate-kid",
+      "imageCode": "the_karate_kid",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -1353,7 +1353,7 @@
     {
       "id": 55,
       "categoryId": 4,
-      "imageCode": "the-hunger-games",
+      "imageCode": "the_hunger_games",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -1453,7 +1453,7 @@
     {
       "id": 59,
       "categoryId": 4,
-      "imageCode": "john-wick",
+      "imageCode": "john_wick",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -1484,11 +1484,11 @@
       "options": [
         {
           "id": 1,
-          "value": "Spider-Man"
+          "value": "Spider Man"
         },
         {
           "id": 2,
-          "value": "X-Men"
+          "value": "XMen"
         },
         {
           "id": 3,
@@ -1578,7 +1578,7 @@
     {
       "id": 64,
       "categoryId": 4,
-      "imageCode": "american-psycho",
+      "imageCode": "american_psycho",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -1603,7 +1603,7 @@
     {
       "id": 65,
       "categoryId": 4,
-      "imageCode": "the-princess-diaries",
+      "imageCode": "the_princess_diaries",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -1628,7 +1628,7 @@
     {
       "id": 66,
       "categoryId": 4,
-      "imageCode": "the-nightmare-before-christmas",
+      "imageCode": "the_nightmare_before_christmas",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -1653,7 +1653,7 @@
     {
       "id": 67,
       "categoryId": 4,
-      "imageCode": "the-incredibles",
+      "imageCode": "the_incredibles",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -1678,7 +1678,7 @@
     {
       "id": 68,
       "categoryId": 4,
-      "imageCode": "sixteen-candles",
+      "imageCode": "sixteen_candles",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -1778,7 +1778,7 @@
     {
       "id": 72,
       "categoryId": 4,
-      "imageCode": "men-in-black",
+      "imageCode": "men_in_black",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -1809,7 +1809,7 @@
       "options": [
         {
           "id": 1,
-          "value": "X-Men Origins: Wolverine"
+          "value": "X Men Origins: Wolverine"
         },
         {
           "id": 2,
@@ -1903,7 +1903,7 @@
     {
       "id": 77,
       "categoryId": 4,
-      "imageCode": "freddy-vs-jason",
+      "imageCode": "freddy_vs_jason",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -1978,7 +1978,7 @@
     {
       "id": 80,
       "categoryId": 4,
-      "imageCode": "avengers-endgame",
+      "imageCode": "avengers_endgame",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -2003,7 +2003,7 @@
     {
       "id": 81,
       "categoryId": 4,
-      "imageCode": "waynes-world",
+      "imageCode": "waynes_world",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -2028,7 +2028,7 @@
     {
       "id": 82,
       "categoryId": 4,
-      "imageCode": "the-thing",
+      "imageCode": "the_thing",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -2053,7 +2053,7 @@
     {
       "id": 83,
       "categoryId": 4,
-      "imageCode": "the-breakfast-club",
+      "imageCode": "the_breakfast_club",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -2078,7 +2078,7 @@
     {
       "id": 84,
       "categoryId": 4,
-      "imageCode": "pirates-of-the-caribbean-the-curse-of-the-black-pearl",
+      "imageCode": "pirates_of_the_caribbean_the_curse_of_the_black_pearl",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -2153,7 +2153,7 @@
     {
       "id": 87,
       "categoryId": 4,
-      "imageCode": "legally-blonde",
+      "imageCode": "legally_blonde",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -2253,7 +2253,7 @@
     {
       "id": 91,
       "categoryId": 4,
-      "imageCode": "die-hard",
+      "imageCode": "die_hard",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -2303,7 +2303,7 @@
     {
       "id": 93,
       "categoryId": 4,
-      "imageCode": "captain-america-the-winder-soldier",
+      "imageCode": "captain_america_the_winder_soldier",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -2378,7 +2378,7 @@
     {
       "id": 96,
       "categoryId": 4,
-      "imageCode": "the-shining",
+      "imageCode": "the_shining",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -2403,7 +2403,7 @@
     {
       "id": 97,
       "categoryId": 4,
-      "imageCode": "the-shawshank-redemption",
+      "imageCode": "the_shawshank_redemption",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -2428,7 +2428,7 @@
     {
       "id": 98,
       "categoryId": 4,
-      "imageCode": "the-notebook",
+      "imageCode": "the_notebook",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -2453,7 +2453,7 @@
     {
       "id": 99,
       "categoryId": 4,
-      "imageCode": "the-devil-wears-prada",
+      "imageCode": "the_devil_wears_prada",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -2478,7 +2478,7 @@
     {
       "id": 100,
       "categoryId": 4,
-      "imageCode": "spy-kids",
+      "imageCode": "spy_kids",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -2503,7 +2503,7 @@
     {
       "id": 101,
       "categoryId": 4,
-      "imageCode": "shes-all-that",
+      "imageCode": "shes_all_that",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -2528,7 +2528,7 @@
     {
       "id": 102,
       "categoryId": 4,
-      "imageCode": "pretty-woman",
+      "imageCode": "pretty_woman",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -2553,7 +2553,7 @@
     {
       "id": 103,
       "categoryId": 4,
-      "imageCode": "paranormal-activity",
+      "imageCode": "paranormal_activity",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -2578,7 +2578,7 @@
     {
       "id": 104,
       "categoryId": 4,
-      "imageCode": "one-flew-over-the-cuckoos-nest",
+      "imageCode": "one_flew_over_the_cuckoos_nest",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -2603,7 +2603,7 @@
     {
       "id": 105,
       "categoryId": 4,
-      "imageCode": "my-big-fat-greek-wedding",
+      "imageCode": "my_big_fat_greek_wedding",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -2628,7 +2628,7 @@
     {
       "id": 106,
       "categoryId": 4,
-      "imageCode": "mean-girls",
+      "imageCode": "mean_girls",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -2653,7 +2653,7 @@
     {
       "id": 107,
       "categoryId": 4,
-      "imageCode": "home-alone",
+      "imageCode": "home_alone",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -2678,7 +2678,7 @@
     {
       "id": 108,
       "categoryId": 4,
-      "imageCode": "happy-feet",
+      "imageCode": "happy_feet",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -2703,7 +2703,7 @@
     {
       "id": 109,
       "categoryId": 4,
-      "imageCode": "get-out",
+      "imageCode": "get_out",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -2728,7 +2728,7 @@
     {
       "id": 110,
       "categoryId": 4,
-      "imageCode": "dirty-dancing",
+      "imageCode": "dirty_dancing",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -2753,7 +2753,7 @@
     {
       "id": 111,
       "categoryId": 4,
-      "imageCode": "diary-of-a-wimpy-kid",
+      "imageCode": "diary_of_a_wimpy_kid",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -2792,7 +2792,7 @@
         },
         {
           "id": 3,
-          "value": "Wall-E"
+          "value": "Wall E"
         },
         {
           "id": 4,
@@ -2803,7 +2803,7 @@
     {
       "id": 113,
       "categoryId": 4,
-      "imageCode": "the-wizard-of-oz",
+      "imageCode": "the_wizard_of_oz",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -2828,7 +2828,7 @@
     {
       "id": 114,
       "categoryId": 4,
-      "imageCode": "the-mask",
+      "imageCode": "the_mask",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -2853,7 +2853,7 @@
     {
       "id": 115,
       "categoryId": 4,
-      "imageCode": "pitch-perfect",
+      "imageCode": "pitch_perfect",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -2878,7 +2878,7 @@
     {
       "id": 116,
       "categoryId": 4,
-      "imageCode": "monty-python-and-the-holy-grail",
+      "imageCode": "monty_python_and_the_holy_grail",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -2903,7 +2903,7 @@
     {
       "id": 117,
       "categoryId": 4,
-      "imageCode": "mamma-mia",
+      "imageCode": "mamma_mia",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -2928,7 +2928,7 @@
     {
       "id": 118,
       "categoryId": 4,
-      "imageCode": "jerry-maguire",
+      "imageCode": "jerry_maguire",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -2978,7 +2978,7 @@
     {
       "id": 120,
       "categoryId": 4,
-      "imageCode": "guardians-of-the-galaxy",
+      "imageCode": "guardians_of_the_galaxy",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -3003,7 +3003,7 @@
     {
       "id": 121,
       "categoryId": 4,
-      "imageCode": "gone-with-the-wind",
+      "imageCode": "gone_with_the_wind",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -3028,7 +3028,7 @@
     {
       "id": 122,
       "categoryId": 4,
-      "imageCode": "freaky-friday",
+      "imageCode": "freaky_friday",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -3053,7 +3053,7 @@
     {
       "id": 123,
       "categoryId": 4,
-      "imageCode": "finding-memo",
+      "imageCode": "finding_memo",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -3078,7 +3078,7 @@
     {
       "id": 124,
       "categoryId": 4,
-      "imageCode": "evil-dead",
+      "imageCode": "evil_dead",
       "content": "Which movie poster does this image belong to?",
       "answer": 2,
       "options": [
@@ -3103,7 +3103,7 @@
     {
       "id": 125,
       "categoryId": 4,
-      "imageCode": "children-of-the-corn",
+      "imageCode": "children_of_the_corn",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -3128,7 +3128,7 @@
     {
       "id": 126,
       "categoryId": 4,
-      "imageCode": "captain-america-civil-war",
+      "imageCode": "captain_america_civil_war",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -3153,7 +3153,7 @@
     {
       "id": 127,
       "categoryId": 4,
-      "imageCode": "10-things-i-hate-about-you",
+      "imageCode": "10_things_i_hate_about_you",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -3203,7 +3203,7 @@
     {
       "id": 129,
       "categoryId": 4,
-      "imageCode": "the-grand-budapeste-hotel",
+      "imageCode": "the_grand_budapeste_hotel",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -3228,7 +3228,7 @@
     {
       "id": 130,
       "categoryId": 4,
-      "imageCode": "the-frighteners",
+      "imageCode": "the_frighteners",
       "content": "Which movie poster does this image belong to?",
       "answer": 1,
       "options": [
@@ -3253,7 +3253,7 @@
     {
       "id": 131,
       "categoryId": 4,
-      "imageCode": "raging-bull",
+      "imageCode": "raging_bull",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -3303,7 +3303,7 @@
     {
       "id": 133,
       "categoryId": 4,
-      "imageCode": "live-and-let-die",
+      "imageCode": "live_and_let_die",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -3353,7 +3353,7 @@
     {
       "id": 135,
       "categoryId": 4,
-      "imageCode": "jurassic-world",
+      "imageCode": "jurassic_world",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
@@ -3403,7 +3403,7 @@
     {
       "id": 137,
       "categoryId": 4,
-      "imageCode": "drag-me-to-hell",
+      "imageCode": "drag_me_to_hell",
       "content": "Which movie poster does this image belong to?",
       "answer": 3,
       "options": [
@@ -3453,7 +3453,7 @@
     {
       "id": 139,
       "categoryId": 4,
-      "imageCode": "apocalypse-now",
+      "imageCode": "apocalypse_now",
       "content": "Which movie poster does this image belong to?",
       "answer": 4,
       "options": [
