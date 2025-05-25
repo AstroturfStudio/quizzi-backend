@@ -85,8 +85,10 @@ class RoomService {
     suspend fun closeRoom(room: GameRoom) {
         val playerIds: List<String>
         synchronized(this) {
-            playerIds = room.getPlayers().map { player ->
+            room.getPlayers().forEach { player ->
                 playerToRoom.remove(player.id)
+            }
+            playerIds = room.getPlayers().map { player ->
                 player.id
             }
             rooms.remove(room.id)
