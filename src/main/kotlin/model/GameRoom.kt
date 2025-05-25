@@ -116,7 +116,9 @@ data class GameRoom(
             }
 
             RoomState.Closing -> {
-                game.transitionTo(GameState.Over)
+                if (game.getState() !is GameState.Over) {
+                    game.transitionTo(GameState.Over)
+                }
                 RoomManagerService.INSTANCE.closeRoom(this)
             }
         }
