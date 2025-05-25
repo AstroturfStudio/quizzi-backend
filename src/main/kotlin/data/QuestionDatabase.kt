@@ -3,31 +3,38 @@ package data
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import model.Question
-import java.nio.file.Files
-import java.nio.file.Paths
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 object QuestionDatabase {
     private val questions: List<Question> = loadQuestions()
 
     private fun loadQuestions(): List<Question> {
         val questions = mutableListOf<Question>()
+        // Names of all your question files in src/main/resources/questions
+        val questionFiles = listOf(
+            "countryCapitalsQuestions.json",
+            "flagQuestions.json",
+            "footballClubsLogoQuestions.json",
+            "hollywoodStarsQuestions.json",
+            "moviePostersQuestions.json"
+        )
 
-        val resourceDirUri = javaClass.getResource("/questions")?.toURI() ?: return emptyList()
-
-        val resourceDir = Paths.get(resourceDirUri)
-
-        Files.newDirectoryStream(resourceDir, "*.json").use { stream ->
-            for (path in stream) {
-                try {
-                    val json = Files.newBufferedReader(path).use { it.readText() }
-                    val response = Json.decodeFromString<QuestionResponse>(json)
-                    questions.addAll(response.questions)
-                } catch (e: Exception) {
-                    println("Failed to read ${path.fileName}: ${e.message}")
+        questionFiles.forEach { fileName ->
+            try {
+                val inputStream = javaClass.getResourceAsStream("/questions/$fileName")
+                if (inputStream == null) {
+                    println("Failed to find resource: /questions/$fileName")
+                    return@forEach // continue to next file
                 }
+                val json = BufferedReader(InputStreamReader(inputStream)).use { it.readText() }
+                val response = Json.decodeFromString<QuestionResponse>(json)
+                questions.addAll(response.questions)
+            } catch (e: Exception) {
+                println("Failed to read or parse $fileName: ${e.message}")
+                e.printStackTrace()
             }
         }
-
         return questions
     }
 
